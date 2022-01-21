@@ -24,12 +24,13 @@ const getHash = (length = 10) => {
 
 const uri = "mongodb+srv://iakubenkoi:Ira123456789@cluster0.rhxfy.mongodb.net/shortener?retryWrites=true&w=majority";
 const mongoClient = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+const PORT = process.env.PORT || 3000;
 
 (async () => {
     try {
         await mongoClient.connect();
         app.locals.collection = mongoClient.db("shortener").collection("urls");
-        await app.listen(3000);
+        await app.listen(PORT);
         console.log("Server is waiting for connection...");
     } catch (err) {
         return console.log(err);
